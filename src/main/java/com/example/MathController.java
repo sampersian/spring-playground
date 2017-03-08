@@ -12,4 +12,9 @@ public class MathController {
     public String getPi() {
         return "3.141592653589793";
     }
+
+    @GetMapping("/calculate")
+    public String doCalculation(OperationInfo operationInfo) {
+        return String.format("%s", operationInfo.buildString());
+    }
 }
