@@ -28,4 +28,11 @@ public class MathController {
         }
         return (sum.toString());
     }
+
+    @RequestMapping("/volume/{length}/{width}/{height}")
+    public String getVolume(@PathVariable String length, @PathVariable String width, @PathVariable String height) {
+        Integer volume = (Integer.parseInt(length) * Integer.parseInt(width) * Integer.parseInt(height));
+        return String.format("The volume of a %sx%sx%s rectangle is %s", length, width, height, volume.toString());
+    }
+
 }
