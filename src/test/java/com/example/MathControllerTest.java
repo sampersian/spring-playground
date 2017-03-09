@@ -28,11 +28,52 @@ public class MathControllerTest {
     }
 
     @Test
-    public void testOperationType () throws Exception {
-        RequestBuilder request = MockMvcRequestBuilders.get("/math/calculate?operation=add?x=1&y=2");
+    public void testAddition () throws Exception {
+        RequestBuilder request = MockMvcRequestBuilders.get("/math/calculate?operation=add&x=1&y=2");
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(content().string("3"));
+                .andExpect(content().string("1 + 2 = 3"));
+    }
+
+    @Test
+    public void testDefault () throws Exception {
+        RequestBuilder request = MockMvcRequestBuilders.get("/math/calculate?x=1&y=2");
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("1 + 2 = 3"));
+    }
+    @Test
+    public void testSubtraction () throws Exception {
+        RequestBuilder request = MockMvcRequestBuilders.get("/math/calculate?operation=subtract&x=2&y=1");
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("2 - 1 = 1"));
+    }
+    @Test
+    public void testMultiplication () throws Exception {
+        RequestBuilder request = MockMvcRequestBuilders.get("/math/calculate?operation=multiply&x=3&y=2");
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("3 * 2 = 6"));
+    }
+    @Test
+    public void testDivision () throws Exception {
+        RequestBuilder request = MockMvcRequestBuilders.get("/math/calculate?operation=divide&x=6&y=2");
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("6 / 2 = 3"));
+    }
+    @Test
+    public void testSum () throws Exception {
+        RequestBuilder request = MockMvcRequestBuilders.post("/math/sum?n=1&n=2&n=888");
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("891"));
     }
 }
