@@ -1,8 +1,7 @@
 package com.example;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -16,5 +15,17 @@ public class MathController {
     @GetMapping("/calculate")
     public String doCalculation(OperationInfo operationInfo) {
         return String.format("%s", operationInfo.buildString());
+    }
+
+    @PostMapping("/sum")
+    public String getMapParams(@RequestParam MultiValueMap querystring) {
+        Integer sum = 0;
+        Object numbers = querystring.get("n");
+        String[] numbersString = numbers.toString().replace("[", "").replace("]", "").split(", ");
+
+        for (String number : numbersString) {
+            sum += Integer.parseInt(number);
+        }
+        return (sum.toString());
     }
 }

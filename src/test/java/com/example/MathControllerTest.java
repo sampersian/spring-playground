@@ -29,10 +29,10 @@ public class MathControllerTest {
 
     @Test
     public void testOperationType () throws Exception {
-        RequestBuilder request = MockMvcRequestBuilders.get("/math/calculate?operation=add");
+        RequestBuilder request = MockMvcRequestBuilders.get("/math/calculate?operation=add?x=1&y=2");
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(content().string("operation type is add"));
+                .andExpect(content().string("3"));
     }
 }
